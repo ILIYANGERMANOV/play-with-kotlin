@@ -31,6 +31,9 @@ dependencies {
 
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibVersion"
     implementation "com.android.support.constraint:constraint-layout:1.1.2"
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation "android.arch.lifecycle:extensions:$rootProject.lifecycleVersion"
+
 
     // Testing dependencies
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion"
