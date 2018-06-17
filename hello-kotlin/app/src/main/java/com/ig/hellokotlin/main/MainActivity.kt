@@ -11,7 +11,7 @@ class MainActivity() : MVPActivity<MainContract.Presenter>(), MainContract.View 
 
     override fun initPresenter(applicationContext: Context) = MainPresenter(this)
 
-    override fun onBusinessLogic() {
+    override fun onReady() {
         presenter.start()
     }
 

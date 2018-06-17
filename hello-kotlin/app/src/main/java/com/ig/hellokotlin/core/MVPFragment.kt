@@ -26,6 +26,7 @@ abstract class MVPFragment<P : BasePresenter> : Fragment(), BaseView {
     ): View? {
         val root = inflater.inflate(getLayout(), container, false)
         onSetupUI()
+        onSetupListeners()
         return root
     }
 
@@ -36,7 +37,7 @@ abstract class MVPFragment<P : BasePresenter> : Fragment(), BaseView {
 
     override fun onStart() {
         super.onStart()
-        onBusinessLogic()
+        onReady()
     }
 
     /**
@@ -48,7 +49,13 @@ abstract class MVPFragment<P : BasePresenter> : Fragment(), BaseView {
     /**
      * Empty stub
      */
-    protected open fun onBusinessLogic() {
+    protected open fun onSetupListeners() {
+    }
+
+    /**
+     * Empty stub
+     */
+    protected open fun onReady() {
     }
 
     override fun onDestroyView() {

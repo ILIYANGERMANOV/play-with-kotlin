@@ -22,12 +22,13 @@ abstract class MVPActivity<P : BasePresenter> : AppCompatActivity(), BaseView {
         setContentView(getContentLayout())
         presenter = initPresenter(applicationContext)
         onSetupUI()
+        onSetupListeners()
     }
 
     override fun onStart() {
         super.onStart()
         UIActive = true
-        onBusinessLogic()
+        onReady()
     }
 
     /**
@@ -45,7 +46,13 @@ abstract class MVPActivity<P : BasePresenter> : AppCompatActivity(), BaseView {
     /**
      * Empty stub
      */
-    protected open fun onBusinessLogic() {
+    protected open fun onSetupListeners() {
+    }
+
+    /**
+     * Empty stub
+     */
+    protected open fun onReady() {
     }
 
     override fun onStop() {
