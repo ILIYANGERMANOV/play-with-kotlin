@@ -1,12 +1,12 @@
 package com.ig.hellokotlin.core
 
+import android.content.Context
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 
 abstract class MVPFragment<P : BasePresenter> : Fragment(), BaseView {
     override var UIActive: Boolean = false
@@ -16,6 +16,8 @@ abstract class MVPFragment<P : BasePresenter> : Fragment(), BaseView {
 
     @LayoutRes
     protected abstract fun getLayout(): Int
+
+    protected abstract fun initPresenter(applicationContext: Context): P
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -27,9 +29,13 @@ abstract class MVPFragment<P : BasePresenter> : Fragment(), BaseView {
         return root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        UIActive = true
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        presenter = initPresenter(activity!!.applicationContext)
+    }
+
+    override fun onStart() {
+        super.onStart()
         onBusinessLogic()
     }
 
@@ -43,11 +49,6 @@ abstract class MVPFragment<P : BasePresenter> : Fragment(), BaseView {
      * Empty stub
      */
     protected open fun onBusinessLogic() {
-    }
-
-    override fun onStop() {
-        super.onStop()
-        UIActive = false
     }
 
     override fun onDestroyView() {
