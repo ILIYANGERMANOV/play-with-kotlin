@@ -1,8 +1,11 @@
 package com.ig.hellokotlin.main
 
-class MainPresenter(override var view: MainContract.View?) : MainContract.Presenter {
-    override fun initUI() {
+import com.ig.hellokotlin.core.Presenter
+
+class MainPresenter(view: MainContract.View) :
+        Presenter<MainContract.View>(view), MainContract.Presenter {
+
+    override fun start() {
         view?.setMessage("Hello, Kotlin!")
     }
-
 }

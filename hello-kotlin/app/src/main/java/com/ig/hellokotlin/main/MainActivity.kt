@@ -1,25 +1,21 @@
 package com.ig.hellokotlin.main
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.content.Context
 import com.ig.hellokotlin.R
+import com.ig.hellokotlin.core.MVPActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), MainContract.View {
-    val presenter: MainContract.Presenter = MainPresenter(this)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        presenter.initUI()
+class MainActivity() : MVPActivity<MainContract.Presenter>(), MainContract.View {
+    override fun getContentLayout() = R.layout.activity_main
+
+    override fun initPresenter(applicationContext: Context) = MainPresenter(this)
+
+    override fun onBusinessLogic() {
+        presenter.start()
     }
 
     override fun setMessage(message: String) {
         tvMessage.text = message
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.onDestroy()
     }
 }
