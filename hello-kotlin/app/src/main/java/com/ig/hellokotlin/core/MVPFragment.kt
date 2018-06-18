@@ -26,13 +26,13 @@ abstract class MVPFragment<P : BasePresenter> : Fragment(), BaseView {
     ): View? {
         val root = inflater.inflate(getLayout(), container, false)
         onSetupUI()
-        onSetupListeners()
         return root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         presenter = initPresenter(activity!!.applicationContext)
+        onSetupListeners()
     }
 
     override fun onStart() {
