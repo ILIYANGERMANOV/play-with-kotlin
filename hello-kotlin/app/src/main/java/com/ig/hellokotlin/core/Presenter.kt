@@ -1,5 +1,7 @@
 package com.ig.hellokotlin.core
 
+import android.support.annotation.CallSuper
+
 abstract class Presenter<V : BaseView>(view: V?) : BasePresenter {
 
     protected var view: V? = view
@@ -12,6 +14,7 @@ abstract class Presenter<V : BaseView>(view: V?) : BasePresenter {
             }
         }
 
+    @CallSuper
     override fun onDestroy() {
         view = null
     }

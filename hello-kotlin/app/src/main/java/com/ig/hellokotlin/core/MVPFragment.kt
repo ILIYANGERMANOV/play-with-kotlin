@@ -2,6 +2,7 @@ package com.ig.hellokotlin.core
 
 import android.content.Context
 import android.os.Bundle
+import android.support.annotation.CallSuper
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -24,9 +25,12 @@ abstract class MVPFragment<P : BasePresenter> : Fragment(), BaseView {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(getLayout(), container, false)
+        return inflater.inflate(getLayout(), container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         onSetupUI()
-        return root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -58,6 +62,7 @@ abstract class MVPFragment<P : BasePresenter> : Fragment(), BaseView {
     protected open fun onReady() {
     }
 
+    @CallSuper
     override fun onDestroyView() {
         super.onDestroyView()
         presenter.onDestroy()
